@@ -1,5 +1,7 @@
 package me.lojosho.hibiscuscommons;
 
+import com.github.Anon8281.universalScheduler.UniversalScheduler;
+import com.github.Anon8281.universalScheduler.scheduling.schedulers.TaskScheduler;
 import lombok.Getter;
 import me.lojosho.hibiscuscommons.hooks.Hooks;
 import me.lojosho.hibiscuscommons.listener.PlayerConnectionEvent;
@@ -17,6 +19,9 @@ public final class HibiscusCommonsPlugin extends HibiscusPlugin {
     @Getter
     private static boolean onFolia = false;
 
+    @Getter
+    private TaskScheduler taskScheduler;
+
     public HibiscusCommonsPlugin() {
         super(20726);
     }
@@ -24,6 +29,7 @@ public final class HibiscusCommonsPlugin extends HibiscusPlugin {
     @Override
     public void onStart() {
         instance = this;
+        taskScheduler = UniversalScheduler.getScheduler(this);
 
         // Do startup checks
         onPaper = checkPaper();
@@ -63,15 +69,15 @@ public final class HibiscusCommonsPlugin extends HibiscusPlugin {
     }
 
     /**
-     * Checks for the Folia region scheduler method. Use {@link HibiscusCommonsPlugin#isOnFolia()} for cached value.
+     * Checks for the Folia server implementation (Paper also has region scheduler APIs). Use {@link HibiscusCommonsPlugin#isOnFolia()} for cached value.
      * @return True if plugin is running on a server with Folia; False if not
      */
     @ApiStatus.Internal
     public boolean checkFolia() {
         try {
-            Bukkit.class.getMethod("getRegionScheduler");
+            Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
             return true;
-        } catch (NoSuchMethodException e) {
+        } catch (ClassNotFoundException e) {
             return false;
         }
     }

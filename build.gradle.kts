@@ -161,6 +161,7 @@ tasks {
         nmsVersions.forEach { dependsOn("$it:build") }
         mergeServiceFiles()
 
+        relocate("com.github.Anon8281.universalScheduler", "me.lojosho.shaded.scheduler")
         relocate("org.bstats", "me.lojosho.shaded.bstats")
         relocate("org.spongepowered.configurate", "me.lojosho.shaded.configurate")
         relocate("com.jeff_media.updatechecker", "me.lojosho.shaded.updatechecker")

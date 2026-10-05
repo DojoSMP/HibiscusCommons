@@ -17,5 +17,6 @@ tasks {
 }
 
 dependencies {
+    implementation("com.github.Anon8281:UniversalScheduler:0.1.7")
     compileOnly("io.papermc.paper:paper-api:1.21.10-R0.1-SNAPSHOT")
 }

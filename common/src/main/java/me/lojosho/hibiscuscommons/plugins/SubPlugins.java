@@ -1,5 +1,6 @@
 package me.lojosho.hibiscuscommons.plugins;
 
+import java.util.concurrent.CopyOnWriteArrayList;
 import com.google.common.collect.ImmutableList;
 import me.lojosho.hibiscuscommons.HibiscusPlugin;
 import org.jetbrains.annotations.ApiStatus;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class SubPlugins {
 
-    private static final List<HibiscusPlugin> SUB_PLUGINS = new ArrayList<>();
+    private static final List<HibiscusPlugin> SUB_PLUGINS = new CopyOnWriteArrayList<>();
 
     @NotNull
     public static List<HibiscusPlugin> getSubPlugins() {
